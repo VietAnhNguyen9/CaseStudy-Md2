@@ -1,3 +1,7 @@
+package manager;
+
+import model.Author;
+import model.Book;
 
 import java.io.*;
 import java.util.ArrayList;

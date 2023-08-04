@@ -1,3 +1,7 @@
+package menu;
+
+import manager.BookManager;
+
 import java.util.Scanner;
 
 public class Menu {

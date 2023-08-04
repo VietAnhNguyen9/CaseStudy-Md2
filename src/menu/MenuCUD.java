@@ -1,3 +1,8 @@
+package menu;
+
+import manager.AuthorManager;
+import manager.BookManager;
+
 import java.util.Scanner;
 
 public class MenuCUD {

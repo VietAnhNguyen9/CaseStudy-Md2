@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SearchMenu {
@@ -10,14 +11,18 @@ public class SearchMenu {
             System.out.println("2.Price under 300.000 VND");
             System.out.println("0.Exit");
             System.out.println("Enter your choice: ");
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    bookManager.searchByPriceOver300k();
-                    break;
-                case 2:
-                    bookManager.searchByPriceUnder300k();
-                    break;
+            try {
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        bookManager.searchByPriceOver300k();
+                        break;
+                    case 2:
+                        bookManager.searchByPriceUnder300k();
+                        break;
+                }
+            }catch(NumberFormatException e) {
+                System.err.println("Please be a smart user, re-enter according to the available menu !");
             }
         }while (choice != 0);
     }
@@ -28,18 +33,22 @@ public class SearchMenu {
             System.out.println("3.Search by author");
             System.out.println("0.Exit");
             System.out.println("Enter your choice: ");
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    bookManager.searchByName();
-                    break;
-                case 2:
-                    searchByPriceMenu();
-                    break;
-                case 3:
-                    bookManager.searchByAuthor();
-                    break;
+            try {
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        bookManager.searchByName();
+                        break;
+                    case 2:
+                        searchByPriceMenu();
+                        break;
+                    case 3:
+                        bookManager.searchByAuthor();
+                        break;
 
+                }
+            }catch (NumberFormatException | InputMismatchException e) {
+                System.err.println("Please be a smart user, re-enter according to the available menu !");
             }
         }while (choice != 0);
     }

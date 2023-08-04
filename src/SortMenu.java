@@ -10,14 +10,18 @@ public class SortMenu {
             System.out.println("2.Sort descending by price");
             System.out.println("0.Exit");
             System.out.println("Enter your choice: ");
-            choice = Integer.parseInt(scanner.nextLine());
-            switch (choice) {
-                case 1:
-                    bookManager.sortAscendingByPrice();
-                    break;
-                case 2:
-                    bookManager.sortDescendingByPrice();
-                    break;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        bookManager.sortAscendingByPrice();
+                        break;
+                    case 2:
+                        bookManager.sortDescendingByPrice();
+                        break;
+                }
+            }catch (NumberFormatException e) {
+                System.err.println("Please be a smart user, re-enter according to the available menu !");
             }
         }while(choice != 0);
     }

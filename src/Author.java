@@ -1,3 +1,5 @@
+
+
 import java.io.Serializable;
 
 public class Author implements Serializable {
@@ -7,7 +9,6 @@ public class Author implements Serializable {
 
     public Author() {
     }
-
     public Author(String name, String yearOfBirth, String gender) {
         this.name = name;
         this.yearOfBirth = yearOfBirth;
@@ -40,10 +41,11 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author{" +
-                "name='" + name + '\'' +
-                ", yearOfBirth='" + yearOfBirth + '\'' +
-                ", gender='" + gender + '\'' +
+        return "author{" +
+                "name:" + name + '\'' +
+                ", yearOfBirth:'" + yearOfBirth + '\'' +
+                ", gender:2" +
+                "'" + gender + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,8 +13,7 @@ public class BookManager {
     AuthorManager authorManager = AuthorManager.getInstance();
     List<Book>listBook = new ArrayList<>();
     private BookManager() {
-        listBook = readDataFromFile();
-
+            listBook = readDataFromFile();
     }
     public static BookManager getInstance() {
         if (instance == null) {
@@ -50,20 +51,23 @@ public class BookManager {
         System.out.println("2.The author is not on the list yet");
         do {
             System.out.println("Enter your choice: ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    author = authorManager.checkNameAuthor();
-                    if (author == null) {
-                        System.err.println("This author is not in the list ! ");
-                    }
-                    break;
-                case 2:
-                    author = authorManager.addAuthor();
-                    break;
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        author = authorManager.checkNameAuthor();
+                        if (author == null) {
+                            System.err.println("This author is not in the list ! ");
+                        }
+                        break;
+                    case 2:
+                        author = authorManager.addAuthor();
+                        break;
+                }
+            }catch(NumberFormatException e) {
+                System.err.println("Please be a smart user, re-enter according to the available menu !");
             }
         } while (author == null);
-        scanner.nextLine();
         System.out.println("Publishing Year: ");
         String publishingYear = scanner.nextLine();
         System.out.println("Enter category: ");
@@ -77,10 +81,14 @@ public class BookManager {
         writeDataToFile(listBook);
     }
     public void displayListBook() {
-        System.out.println("List of books of the store: ");
-        for (Book a:listBook
-             ) {
-            System.out.println(a);
+        if (listBook.isEmpty()){
+            System.err.println("List is Empty !");
+        }else {
+            System.out.println("List of books of the store: ");
+            for (Book a:listBook
+            ) {
+                System.out.println(a);
+            }
         }
     }
     public void updateBook() {
@@ -152,7 +160,7 @@ public class BookManager {
     public void searchByPriceOver300k() {
         boolean flag = false;
         for (int i = 0; i < listBook.size(); i++) {
-            if (listBook.get(i).getPrice() > 300000) {
+            if (listBook.get(i).getPrice() >= 300000) {
                 System.out.println(listBook.get(i).getName());
                 flag = true;
             }
@@ -189,6 +197,7 @@ public class BookManager {
                 }
             }
         }
+        System.out.println("Sorted list is: ");
         displayListBook();
     }
     public void sortDescendingByPrice() {
@@ -201,6 +210,7 @@ public class BookManager {
                 }
             }
         }
+        System.out.println("Sorted list is: ");
         displayListBook();
     }
     public void totalNumberOfBook() {
@@ -220,6 +230,17 @@ public class BookManager {
         System.out.println("-----------------------------");
         System.out.println("Total capital: "+ total+" VND");
         System.out.println("-----------------------------");
+    }
+    public void  deleteBookByAuthor(Author author) {
+        Iterator<Book> iterator = listBook.iterator();
+        while (iterator.hasNext()){
+            Book book = iterator.next();
+            if (book.getAuthor().equals(author)){
+                iterator.remove();
+
+            }
+        }
+        writeDataToFile(listBook);
     }
 
 }
